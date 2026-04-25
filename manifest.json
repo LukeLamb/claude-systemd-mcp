@@ -1,0 +1,82 @@
+{
+  "manifest_version": "0.2",
+  "name": "systemd",
+  "display_name": "systemd",
+  "version": "0.1.0",
+  "description": "Read-only systemd inspection for Claude on Linux — list units, get status, tail the journal, find failed services, and inspect unit files.",
+  "long_description": "Lets Claude answer the most common Linux ops question — _\"why is this service broken?\"_ — without you having to ssh in and run `systemctl status` yourself. Seven tools cover unit listing, per-unit status, journal tailing, failed-unit hunting, unit-property inspection, raw unit-file display (including drop-ins), and queued-job inspection.\n\n**Strictly read-only in v0.1.** No restart, enable/disable, or daemon-reload. Safe on production hosts. If you want destructive control, run those commands manually via [claude-terminal-mcp](https://github.com/LukeLamb/claude-terminal-mcp) — keeping them out of this extension means it can be enabled on shared/sensitive systems without trust concerns.\n\n**Both system and user scopes supported** via a `scope` arg defaulting to `system`. Set `scope: \"user\"` to inspect `--user` units (graphical sessions, per-user agents).",
+  "author": {
+    "name": "Luke Lamb",
+    "url": "https://github.com/LukeLamb"
+  },
+  "homepage": "https://github.com/LukeLamb/claude-systemd-mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LukeLamb/claude-systemd-mcp"
+  },
+  "documentation": "https://github.com/LukeLamb/claude-systemd-mcp#readme",
+  "support": "https://github.com/LukeLamb/claude-systemd-mcp/issues",
+  "icon": "icon.png",
+  "privacy_policies": [
+    "https://github.com/LukeLamb/claude-systemd-mcp#privacy-policy"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server.js"
+      ]
+    }
+  },
+  "tools": [
+    {
+      "name": "list_units",
+      "description": "List systemd units with optional state and type filters. Returns unit name, load/active/sub state, and description per entry."
+    },
+    {
+      "name": "failed_units",
+      "description": "Shortcut for the most common systemd query: list every unit currently in the failed state."
+    },
+    {
+      "name": "unit_status",
+      "description": "Detailed per-unit status: active/sub state, enabled state, main PID, recent journal lines. The 'is this service healthy?' primitive."
+    },
+    {
+      "name": "unit_show",
+      "description": "Full property dump from `systemctl show` (parsed Key=Value) for a single unit. Useful for inspecting Environment vars, ExecStart, Restart policy, drop-ins."
+    },
+    {
+      "name": "unit_cat",
+      "description": "Raw text of a unit file plus all its drop-in overrides — exactly what `systemctl cat <unit>` prints. Use when you need to see what's actually loading."
+    },
+    {
+      "name": "tail_journal",
+      "description": "Read recent journal entries with optional unit filter, priority filter, and time window. Returns parsed entries with timestamp, priority, and message."
+    },
+    {
+      "name": "list_jobs",
+      "description": "List queued/running systemd jobs (rare — useful when something is hanging during boot or a service is stuck activating)."
+    }
+  ],
+  "keywords": [
+    "systemd",
+    "systemctl",
+    "journalctl",
+    "linux",
+    "ops",
+    "monitoring",
+    "claude-desktop"
+  ],
+  "license": "MIT",
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": [
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=16.0.0"
+    }
+  }
+}
