@@ -2,7 +2,7 @@
   "manifest_version": "0.2",
   "name": "systemd",
   "display_name": "systemd",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Read-only systemd inspection for Claude on Linux — list units, get status, tail the journal, find failed services, and inspect unit files.",
   "long_description": "Lets Claude answer the most common Linux ops question — _\"why is this service broken?\"_ — without you having to ssh in and run `systemctl status` yourself. Seven tools cover unit listing, per-unit status, journal tailing, failed-unit hunting, unit-property inspection, raw unit-file display (including drop-ins), and queued-job inspection.\n\n**Strictly read-only in v0.1.** No restart, enable/disable, or daemon-reload. Safe on production hosts. If you want destructive control, run those commands manually via [claude-terminal-mcp](https://github.com/LukeLamb/claude-terminal-mcp) — keeping them out of this extension means it can be enabled on shared/sensitive systems without trust concerns.\n\n**Both system and user scopes supported** via a `scope` arg defaulting to `system`. Set `scope: \"user\"` to inspect `--user` units (graphical sessions, per-user agents).",
   "author": {

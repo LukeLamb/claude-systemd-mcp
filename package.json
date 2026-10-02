@@ -1,6 +1,6 @@
 {
   "name": "claude-systemd-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server for read-only systemd inspection on Linux: list units, status, journal, failed units, unit files.",
   "main": "server.js",
   "license": "MIT",
